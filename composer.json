@@ -1,0 +1,27 @@
+{
+	"name": "estvoyage/value",
+	"type": "library",
+	"description": "A set of whole value to avoid using native PHP type, see http://c2.com/cgi/wiki?ValueObject for more information",
+	"keywords": [ "East", "Value", "Whole value", "Value object" ],
+	"homepage": "http://github.com/estvoyage/value",
+	"license": "BSD",
+	"authors": [
+		{
+			"name": "Frédéric Hardy",
+			"email": "frederic.hardy@mageekbox.net",
+			"homepage": "http://blog.mageekbox.net"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"require-dev": {
+		"atoum/atoum": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"estvoyage\\value\\tests\\units\\": "tests/units",
+			"estvoyage\\value\\": "classes"
+		}
+	}
+}
