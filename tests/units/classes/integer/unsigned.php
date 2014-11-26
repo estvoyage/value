@@ -102,6 +102,17 @@ class unsigned extends units\test
 		;
 	}
 
+	function testPropertiesAvailability()
+	{
+		$this
+			->if(
+				$unsigned = new unsigned\testedClass
+			)
+			->then
+				->boolean(isset($unsigned->{uniqid()}))->isTrue
+		;
+	}
+
 	protected function validValueProvider()
 	{
 		return [

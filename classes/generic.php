@@ -4,6 +4,8 @@ namespace estvoyage\value;
 
 abstract class generic
 {
+	use immutable;
+
 	private
 		$value
 	;
@@ -13,14 +15,9 @@ abstract class generic
 		return $this->value;
 	}
 
-	function __set($property, $value)
+	function __isset($property)
 	{
-		throw new \logicException(get_class($this) . ' is immutable');
-	}
-
-	function __unset($property)
-	{
-		throw new \logicException(get_class($this) . ' is immutable');
+		return true;
 	}
 
 	protected function __construct($value)

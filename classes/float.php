@@ -4,14 +4,14 @@ namespace estvoyage\value;
 
 abstract class float extends generic
 {
-	static function build($value = 0.)
+	function __construct($value = 0.)
 	{
 		if (! static::validate($value))
 		{
 			throw new \domainException('Value should be numeric');
 		}
 
-		return new static((float) $value, 'asFloat');
+		parent::__construct((float) $value);
 	}
 
 	static function validate($value)

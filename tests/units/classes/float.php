@@ -20,7 +20,7 @@ class float extends units\test
 
 	function testBuildWithNoArgument()
 	{
-		$this->float(float\testedClass::build()->value)->isZero;
+		$this->float((new float\testedClass)->{uniqid()})->isZero;
 	}
 
 	/**
@@ -28,7 +28,7 @@ class float extends units\test
 	 */
 	function testBuildWithValidValue($value)
 	{
-		$this->float(float\testedClass::build($value)->value)->isEqualTo((float) $value);
+		$this->float((new float\testedClass($value))->{uniqid()})->isEqualTo((float) $value);
 	}
 
 	/**
@@ -37,7 +37,7 @@ class float extends units\test
 	function testBuildWithInvalidValue($value)
 	{
 		$this
-			->exception(function() use ($value) { float\testedClass::build($value); })
+			->exception(function() use ($value) { new float\testedClass($value); })
 				->isInstanceOf('domainException')
 				->hasMessage('Value should be numeric')
 		;
@@ -66,24 +66,27 @@ class float extends units\test
 	{
 		$this
 			->if(
-				$float = float\testedClass::build($value)
+				$float = new float\testedClass($value)
 			)
 			->then
-				->exception(function() use ($float) { $float->value = uniqid(); })
-					->isInstanceOf('logicException')
-					->hasMessage(get_class($float) . ' is immutable')
-
 				->exception(function() use ($float) { $float->{uniqid()} = uniqid(); })
-					->isInstanceOf('logicException')
-					->hasMessage(get_class($float) . ' is immutable')
-
-				->exception(function() use ($float) { unset($float->value); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($float) . ' is immutable')
 
 				->exception(function() use ($float) { unset($float->{uniqid()}); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($float) . ' is immutable')
+		;
+	}
+
+	function testPropertiesAvailability()
+	{
+		$this
+			->if(
+				$float = new float\testedClass
+			)
+			->then
+				->boolean(isset($float->{uniqid()}))->isTrue
 		;
 	}
 

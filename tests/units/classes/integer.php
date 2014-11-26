@@ -93,6 +93,17 @@ class integer extends units\test
 		;
 	}
 
+	function testPropertiesAvailability()
+	{
+		$this
+			->if(
+				$integer = new integer\testedClass
+			)
+			->then
+				->boolean(isset($integer->{uniqid()}))->isTrue
+		;
+	}
+
 	protected function validValueProvider()
 	{
 		return [

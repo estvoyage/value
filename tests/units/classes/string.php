@@ -93,6 +93,17 @@ class string extends units\test
 		;
 	}
 
+	function testPropertiesAvailability()
+	{
+		$this
+			->if(
+				$string = new string\testedClass
+			)
+			->then
+				->boolean(isset($string->{uniqid()}))->isTrue
+		;
+	}
+
 	protected function validValueProvider()
 	{
 		return [
