@@ -14,8 +14,8 @@ This set provide currently base classes for:
 * integer
 * unsigned integer
 
-All instances of these classes are [immutable](http://c2.com/cgi/wiki?ValueObjectsShouldBeImmutable), so if you try to set or unset them, a  `logicException` will be throwed.  
-You can access to the underlying value with any property name (it seems crazy but it's very usefull and has no side effect because these objects contains only one property which is immutable).  
+All instances of these classes are [immutable](http://c2.com/cgi/wiki?ValueObjectsShouldBeImmutable), so if you try to set or unset one of their properties, a  `logicException` will be throwed.  
+To access the underlying value, use property `asString` for `string`, `asInteger` for `integer` and `asFloat` for `float`.  
 All of these classes are abstract, so you should extends them to quantify your domain:  
 
 ``` php
@@ -47,23 +47,12 @@ final class phone extends string
 }
 
 $phone = new phone('+ 33 1 23 45 67 89');
-echo $phone->value; // display '+ 33 1 23 45 67 89'
-echo $phone->{uniqid()}; // display 'foo' too, if you want avoid that, overload __get() in your class
-
-/*
-final class phone extends string
-{
-	function __get($property)
-	{
-		if ($property == 'asString')
-		{
-			return $this->{$property};
-		}
-
-		throw new \logicException('Undefined property: ' . $property);
-	}
-}
-*/
+echo $phone->asString; // display '+ 33 1 23 45 67 89'
+echo $phone->{uniqid()}; // throw a \logicException with message 'Undefined property in phone: …'
+$phone->{uniqid()} = uniqid(); // throw a \logicException with message 'phone is immutable'
+$phone->asString = uniqid(); // throw a \logicException with message 'phone is immutable'
+unset($phone->{uniqid()}); // throw a \logicException with message 'phone is immutable'
+unset($phone->asString); // throw a \logicException with message 'phone is immutable'
 
 $badFormat = new phone('01 23 45 67 89'); // throw a domainException!
 ```

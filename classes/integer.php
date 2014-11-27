@@ -11,12 +11,12 @@ abstract class integer extends generic
 			throw new \domainException('Value should be an integer');
 		}
 
-		parent::__construct($value);
+		parent::__construct([ 'asInteger' => $value ]);
 	}
 
 	function __toString()
 	{
-		return (string) $this->value;
+		return (string) $this->asInteger;
 	}
 
 	static function validate($value)

@@ -25,7 +25,7 @@ class string extends units\test
 				$string = new string\testedClass
 			)
 			->then
-				->string($string->{uniqid()})->isEmpty
+				->string($string->asString)->isEmpty
 				->castToString($string)->isEmpty
 		;
 	}
@@ -40,7 +40,7 @@ class string extends units\test
 				$string = new string\testedClass($value)
 			)
 			->then
-				->string($string->{uniqid()})->isEqualTo($value)
+				->string($string->asString)->isEqualTo($value)
 				->castToString($string)->isEqualTo($value)
 		;
 	}
@@ -83,7 +83,15 @@ class string extends units\test
 				$string = new string\testedClass($value)
 			)
 			->then
+				->exception(function() use ($string) { $string->asString = uniqid(); })
+					->isInstanceOf('logicException')
+					->hasMessage(get_class($string) . ' is immutable')
+
 				->exception(function() use ($string) { $string->{uniqid()} = uniqid(); })
+					->isInstanceOf('logicException')
+					->hasMessage(get_class($string) . ' is immutable')
+
+				->exception(function() use ($string) { unset($string->asString); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($string) . ' is immutable')
 
@@ -100,7 +108,11 @@ class string extends units\test
 				$string = new string\testedClass
 			)
 			->then
-				->boolean(isset($string->{uniqid()}))->isTrue
+				->boolean(isset($string->asString))->isTrue
+				->boolean(isset($string->{uniqid()}))->isFalse
+				->exception(function() use ($string, & $property) { $string->{$property = uniqid()}; })
+					->isInstanceOf('logicException')
+					->hasMessage('Undefined property in ' . get_class($string) . ': ' . $property)
 		;
 	}
 

@@ -11,12 +11,12 @@ abstract class string extends generic
 			throw new \domainException('Value should be a string');
 		}
 
-		parent::__construct($value);
+		parent::__construct([ 'asString' => $value ]);
 	}
 
 	function __toString()
 	{
-		return $this->value;
+		return $this->asString;
 	}
 
 	static function validate($value)

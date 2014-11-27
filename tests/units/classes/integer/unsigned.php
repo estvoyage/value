@@ -26,7 +26,7 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass()
 			)
 			->then
-				->integer($unsigned->{uniqid()})->isZero
+				->integer($unsigned->asInteger)->isZero
 				->castToString($unsigned)->isEqualTo('0')
 		;
 	}
@@ -41,7 +41,7 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass($value)
 			)
 			->then
-				->integer($unsigned->{uniqid()})->isEqualTo($value)
+				->integer($unsigned->asInteger)->isEqualTo($value)
 				->castToString($unsigned)->isEqualTo((string) $value)
 		;
 	}
@@ -84,7 +84,7 @@ class unsigned extends units\test
 				$integer = new unsigned\testedClass($value)
 			)
 			->then
-				->exception(function() use ($integer) { $integer->value = uniqid(); })
+				->exception(function() use ($integer) { $integer->asInteger = uniqid(); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($integer) . ' is immutable')
 
@@ -92,7 +92,7 @@ class unsigned extends units\test
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($integer) . ' is immutable')
 
-				->exception(function() use ($integer) { unset($integer->value); })
+				->exception(function() use ($integer) { unset($integer->asInteger); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($integer) . ' is immutable')
 
@@ -109,7 +109,11 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass
 			)
 			->then
-				->boolean(isset($unsigned->{uniqid()}))->isTrue
+				->boolean(isset($unsigned->asInteger))->isTrue
+				->boolean(isset($unsigned->{uniqid()}))->isFalse
+				->exception(function() use ($unsigned, & $property) { $unsigned->{$property = uniqid()}; })
+					->isInstanceOf('logicException')
+					->hasMessage('Undefined property in ' . get_class($unsigned) . ': ' . $property)
 		;
 	}
 

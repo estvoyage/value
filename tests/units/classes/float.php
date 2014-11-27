@@ -20,7 +20,7 @@ class float extends units\test
 
 	function testBuildWithNoArgument()
 	{
-		$this->float((new float\testedClass)->{uniqid()})->isZero;
+		$this->float((new float\testedClass)->asFloat)->isZero;
 	}
 
 	/**
@@ -28,7 +28,7 @@ class float extends units\test
 	 */
 	function testBuildWithValidValue($value)
 	{
-		$this->float((new float\testedClass($value))->{uniqid()})->isEqualTo((float) $value);
+		$this->float((new float\testedClass($value))->asFloat)->isEqualTo((float) $value);
 	}
 
 	/**
@@ -69,7 +69,15 @@ class float extends units\test
 				$float = new float\testedClass($value)
 			)
 			->then
+				->exception(function() use ($float) { $float->asFloat = uniqid(); })
+					->isInstanceOf('logicException')
+					->hasMessage(get_class($float) . ' is immutable')
+
 				->exception(function() use ($float) { $float->{uniqid()} = uniqid(); })
+					->isInstanceOf('logicException')
+					->hasMessage(get_class($float) . ' is immutable')
+
+				->exception(function() use ($float) { unset($float->asFloat); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($float) . ' is immutable')
 
@@ -86,7 +94,11 @@ class float extends units\test
 				$float = new float\testedClass
 			)
 			->then
-				->boolean(isset($float->{uniqid()}))->isTrue
+				->boolean(isset($float->asFloat))->isTrue
+				->boolean(isset($float->{uniqid()}))->isFalse
+				->exception(function() use ($float, & $property) { $float->{$property = uniqid()}; })
+					->isInstanceOf('logicException')
+					->hasMessage('Undefined property in ' . get_class($float) . ': ' . $property)
 		;
 	}
 

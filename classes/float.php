@@ -11,7 +11,7 @@ abstract class float extends generic
 			throw new \domainException('Value should be numeric');
 		}
 
-		parent::__construct((float) $value);
+		parent::__construct([ 'asFloat' => (float) $value ]);
 	}
 
 	static function validate($value)

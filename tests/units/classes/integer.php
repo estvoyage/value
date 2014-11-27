@@ -25,7 +25,7 @@ class integer extends units\test
 				$integer = new integer\testedClass
 			)
 			->then
-				->integer($integer->{uniqid()})->isZero
+				->integer($integer->asInteger)->isZero
 				->castToString($integer)->isEqualTo('0')
 		;
 	}
@@ -40,7 +40,7 @@ class integer extends units\test
 				$integer = new integer\testedClass($value)
 			)
 			->then
-				->integer($integer->{uniqid()})->isEqualTo($value)
+				->integer($integer->asInteger)->isEqualTo($value)
 				->castToString($integer)->isEqualTo($value)
 		;
 	}
@@ -83,7 +83,15 @@ class integer extends units\test
 				$integer = new integer\testedClass($value)
 			)
 			->then
+				->exception(function() use ($integer) { $integer->asInteger = uniqid(); })
+					->isInstanceOf('logicException')
+					->hasMessage(get_class($integer) . ' is immutable')
+
 				->exception(function() use ($integer) { $integer->{uniqid()} = uniqid(); })
+					->isInstanceOf('logicException')
+					->hasMessage(get_class($integer) . ' is immutable')
+
+				->exception(function() use ($integer) { unset($integer->asInteger); })
 					->isInstanceOf('logicException')
 					->hasMessage(get_class($integer) . ' is immutable')
 
@@ -100,7 +108,11 @@ class integer extends units\test
 				$integer = new integer\testedClass
 			)
 			->then
-				->boolean(isset($integer->{uniqid()}))->isTrue
+				->boolean(isset($integer->asInteger))->isTrue
+				->boolean(isset($integer->{uniqid()}))->isFalse
+				->exception(function() use ($integer, & $property) { $integer->{$property = uniqid()}; })
+					->isInstanceOf('logicException')
+					->hasMessage('Undefined property in ' . get_class($integer) . ': ' . $property)
 		;
 	}
 
