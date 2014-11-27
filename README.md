@@ -1,4 +1,4 @@
-# *estvoyage\value*
+# *estvoyage\value* [![Build Status](https://travis-ci.org/estvoyage/value.svg?branch=master)](https://travis-ci.org/estvoyage/value)
 
 ## A set of whole value for PHP
 
