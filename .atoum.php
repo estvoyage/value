@@ -2,6 +2,8 @@
 
 use mageekguy\atoum\reports;
 
+$script->addDefaultReport();
+
 $runner
 	->addTestsFromDirectory(__DIR__ . '/tests/units/classes')
 	->disallowUndefinedMethodInInterface()
