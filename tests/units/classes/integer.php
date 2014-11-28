@@ -112,7 +112,7 @@ class integer extends units\test
 				->boolean(isset($integer->{uniqid()}))->isFalse
 				->exception(function() use ($integer, & $property) { $integer->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
-					->hasMessage('Undefined property in ' . get_class($integer) . ': ' . $property)
+					->hasMessage('Undefined property: ' . get_class($integer) . '::' . $property)
 		;
 	}
 

@@ -113,7 +113,7 @@ class unsigned extends units\test
 				->boolean(isset($unsigned->{uniqid()}))->isFalse
 				->exception(function() use ($unsigned, & $property) { $unsigned->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
-					->hasMessage('Undefined property in ' . get_class($unsigned) . ': ' . $property)
+					->hasMessage('Undefined property: ' . get_class($unsigned) . '::' . $property)
 		;
 	}
 

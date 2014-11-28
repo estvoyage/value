@@ -112,7 +112,7 @@ class string extends units\test
 				->boolean(isset($string->{uniqid()}))->isFalse
 				->exception(function() use ($string, & $property) { $string->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
-					->hasMessage('Undefined property in ' . get_class($string) . ': ' . $property)
+					->hasMessage('Undefined property: ' . get_class($string) . '::' . $property)
 		;
 	}
 

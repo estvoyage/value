@@ -98,7 +98,7 @@ class float extends units\test
 				->boolean(isset($float->{uniqid()}))->isFalse
 				->exception(function() use ($float, & $property) { $float->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
-					->hasMessage('Undefined property in ' . get_class($float) . ': ' . $property)
+					->hasMessage('Undefined property: ' . get_class($float) . '::' . $property)
 		;
 	}
 

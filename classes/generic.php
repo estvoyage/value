@@ -12,7 +12,7 @@ abstract class generic
 	{
 		if (! isset($this->{$property}))
 		{
-			throw new \logicException('Undefined property in ' . get_class($this) . ': ' . $property);
+			throw new \logicException('Undefined property: ' . get_class($this) . '::' . $property);
 		}
 
 		return $this->values[$property];
