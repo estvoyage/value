@@ -17,7 +17,7 @@ if ($travis)
 
 	if ($coverallsToken)
 	{
-		$coverallsReport = new reports\asynchronous\coveralls(__DIR__ . '/classes', $coverallsToken);
+		$coverallsReport = new reports\asynchronous\coveralls('classes', $coverallsToken);
 
 		$defaultFinder = $coverallsReport->getBranchFinder();
 
