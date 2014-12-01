@@ -14,6 +14,7 @@ This set provide currently base classes for:
 * integer
 * unsigned integer
 * float
+* unsigned float
 
 All instances of these classes are [immutable](http://c2.com/cgi/wiki?ValueObjectsShouldBeImmutable), so if you try to set or unset one of their properties, a  `logicException` will be throwed.  
 To access the underlying value, use property `asString` for `string`, `asInteger` for `integer` and `asFloat` for `float`.  
