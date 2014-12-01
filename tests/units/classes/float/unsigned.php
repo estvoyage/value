@@ -1,6 +1,6 @@
 <?php
 
-namespace estvoyage\value\tests\units\integer;
+namespace estvoyage\value\tests\units\float;
 
 require __DIR__ . '/../../runner.php';
 
@@ -15,7 +15,7 @@ class unsigned extends units\test
 		$this->testedClass
 			->isAbstract
 			->extends('estvoyage\value\generic')
-			->extends('estvoyage\value\integer')
+			->extends('estvoyage\value\float')
 		;
 	}
 
@@ -26,8 +26,8 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass
 			)
 			->then
-				->integer($unsigned->asInteger)->isZero
-				->castToString($unsigned)->isEqualTo('0')
+				->float($unsigned->asFloat)->isZero
+				->castToString($unsigned)->isEqualTo('0.')
 		;
 	}
 
@@ -41,8 +41,8 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass($value)
 			)
 			->then
-				->integer($unsigned->asInteger)->isEqualTo($value)
-				->castToString($unsigned)->isEqualTo((string) $value)
+				->float($unsigned->asFloat)->isEqualTo($value)
+				->castToString($unsigned)->isEqualTo((string) (float) $value)
 		;
 	}
 
@@ -54,7 +54,7 @@ class unsigned extends units\test
 		$this
 			->exception(function() use ($value) { new unsigned\testedClass($value); })
 				->isInstanceOf('domainException')
-				->hasMessage('Value should be an integer greater than or equal to 0')
+				->hasMessage('Value should be a float greater than or equal to 0.')
 		;
 	}
 
@@ -81,24 +81,24 @@ class unsigned extends units\test
 	{
 		$this
 			->if(
-				$integer = new unsigned\testedClass($value)
+				$unsigned = new unsigned\testedClass($value)
 			)
 			->then
-				->exception(function() use ($integer) { $integer->asInteger = uniqid(); })
+				->exception(function() use ($unsigned) { $unsigned->asFloat = uniqid(); })
 					->isInstanceOf('logicException')
-					->hasMessage(get_class($integer) . ' is immutable')
+					->hasMessage(get_class($unsigned) . ' is immutable')
 
-				->exception(function() use ($integer) { $integer->{uniqid()} = uniqid(); })
+				->exception(function() use ($unsigned) { $unsigned->{uniqid()} = uniqid(); })
 					->isInstanceOf('logicException')
-					->hasMessage(get_class($integer) . ' is immutable')
+					->hasMessage(get_class($unsigned) . ' is immutable')
 
-				->exception(function() use ($integer) { unset($integer->asInteger); })
+				->exception(function() use ($unsigned) { unset($unsigned->asFloat); })
 					->isInstanceOf('logicException')
-					->hasMessage(get_class($integer) . ' is immutable')
+					->hasMessage(get_class($unsigned) . ' is immutable')
 
-				->exception(function() use ($integer) { unset($integer->{uniqid()}); })
+				->exception(function() use ($unsigned) { unset($unsigned->{uniqid()}); })
 					->isInstanceOf('logicException')
-					->hasMessage(get_class($integer) . ' is immutable')
+					->hasMessage(get_class($unsigned) . ' is immutable')
 		;
 	}
 
@@ -109,7 +109,7 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass
 			)
 			->then
-				->boolean(isset($unsigned->asInteger))->isTrue
+				->boolean(isset($unsigned->asFloat))->isTrue
 				->boolean(isset($unsigned->{uniqid()}))->isFalse
 				->exception(function() use ($unsigned, & $property) { $unsigned->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
@@ -121,7 +121,9 @@ class unsigned extends units\test
 	{
 		return [
 			'zero as integer' => 0,
-			'any integer between 1 and PHP_INT_MAX' => rand(1, PHP_INT_MAX)
+			'zero as float' => 0.,
+			'any integer between 1 and PHP_INT_MAX' => rand(1, PHP_INT_MAX),
+			'any float greater than 1.' => (float) rand(1, PHP_INT_MAX)
 		];
 	}
 
@@ -145,8 +147,8 @@ class unsigned extends units\test
 	}
 }
 
-namespace estvoyage\value\tests\units\integer\unsigned;
+namespace estvoyage\value\tests\units\float\unsigned;
 
-class testedClass extends \estvoyage\value\integer\unsigned
+class testedClass extends \estvoyage\value\float\unsigned
 {
 }

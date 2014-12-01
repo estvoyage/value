@@ -14,6 +14,11 @@ abstract class float extends generic
 		parent::__construct([ 'asFloat' => (float) $value ]);
 	}
 
+	function __toString()
+	{
+		return (string) $this->asFloat;
+	}
+
 	static function validate($value)
 	{
 		return is_float($value) || is_int($value);

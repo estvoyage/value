@@ -1,14 +1,14 @@
 <?php
 
-namespace estvoyage\value\integer;
+namespace estvoyage\value\float;
 
 use
-	estvoyage\value\integer
+	estvoyage\value\float
 ;
 
-abstract class unsigned extends integer
+abstract class unsigned extends float
 {
-	function __construct($value = 0)
+	function __construct($value = 0.)
 	{
 		$invalid = false;
 
@@ -23,10 +23,8 @@ abstract class unsigned extends integer
 
 		if ($invalid || ! static::isUnsigned($value))
 		{
-			throw new \domainException('Value should be an integer greater than or equal to 0');
+			throw new \domainException('Value should be a float greater than or equal to 0.');
 		}
-
-		parent::__construct($value);
 	}
 
 	static function validate($value)
@@ -36,6 +34,6 @@ abstract class unsigned extends integer
 
 	private static function isUnsigned($value)
 	{
-		return $value >= 0;
+		return $value >= 0.;
 	}
 }
