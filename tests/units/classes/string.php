@@ -101,7 +101,18 @@ class string extends units\test
 		;
 	}
 
-	function testPropertiesAvailability()
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testEquality($value)
+	{
+		$this
+			->boolean(new string\testedClass($value) == new string\testedClass($value))->isTrue
+			->boolean(new string\testedClass($value) == new string\testedClass(uniqid()))->isFalse
+		;
+	}
+
+	function testProperties()
 	{
 		$this
 			->if(

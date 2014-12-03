@@ -101,11 +101,14 @@ class integer extends units\test
 		;
 	}
 
-	function testPropertiesAvailability()
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testProperties($value)
 	{
 		$this
 			->if(
-				$integer = new integer\testedClass
+				$integer = new integer\testedClass($value)
 			)
 			->then
 				->boolean(isset($integer->asInteger))->isTrue
@@ -113,6 +116,17 @@ class integer extends units\test
 				->exception(function() use ($integer, & $property) { $integer->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
 					->hasMessage('Undefined property: ' . get_class($integer) . '::' . $property)
+		;
+	}
+
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testEquality($value)
+	{
+		$this
+			->boolean(new integer\testedClass($value) == new integer\testedClass($value))->isTrue
+			->boolean(new integer\testedClass($value) == new integer\testedClass(rand(- PHP_INT_MAX, PHP_INT_MAX)))->isFalse
 		;
 	}
 

@@ -102,7 +102,10 @@ class unsigned extends units\test
 		;
 	}
 
-	function testPropertiesAvailability()
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testProperties($value)
 	{
 		$this
 			->if(
@@ -114,6 +117,17 @@ class unsigned extends units\test
 				->exception(function() use ($unsigned, & $property) { $unsigned->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
 					->hasMessage('Undefined property: ' . get_class($unsigned) . '::' . $property)
+		;
+	}
+
+	/**
+	 * @dataProvider validValueProvider
+	 */
+	function testEquality($value)
+	{
+		$this
+			->boolean(new unsigned\testedClass($value) == new unsigned\testedClass($value))->isTrue
+			->boolean(new unsigned\testedClass($value) == new unsigned\testedClass((float) rand(0, PHP_INT_MAX)))->isFalse
 		;
 	}
 

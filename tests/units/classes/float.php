@@ -87,7 +87,10 @@ class float extends units\test
 		;
 	}
 
-	function testPropertiesAvailability()
+	/**
+	 * @dataProvider validValueDataProvider
+	 */
+	function testProperties($value)
 	{
 		$this
 			->if(
@@ -99,6 +102,17 @@ class float extends units\test
 				->exception(function() use ($float, & $property) { $float->{$property = uniqid()}; })
 					->isInstanceOf('logicException')
 					->hasMessage('Undefined property: ' . get_class($float) . '::' . $property)
+		;
+	}
+
+	/**
+	 * @dataProvider validValueDataProvider
+	 */
+	function testEquality($value)
+	{
+		$this
+			->boolean(new float\testedClass($value) == new float\testedClass($value))->isTrue
+			->boolean(new float\testedClass($value) == new float\testedClass((float) rand(- PHP_INT_MAX, PHP_INT_MAX)))->isFalse
 		;
 	}
 
