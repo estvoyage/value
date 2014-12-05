@@ -11,7 +11,7 @@ abstract class integer extends generic
 			throw new \domainException('Value should be an integer');
 		}
 
-		parent::__construct([ 'asInteger' => $value ]);
+		parent::__construct([ 'asInteger' => (int) $value ]);
 	}
 
 	function __toString()
@@ -21,6 +21,8 @@ abstract class integer extends generic
 
 	static function validate($value)
 	{
-		return is_int($value);
+		// Why not using filter_var($value, FILTER_VALIDATE_INT) here ?
+		// Because if $value is a float (i.e. (float) rand(1, PHP_INT_MAX)) and strlen($value) > ini_get('precision'), fiter_var return false :/
+		return is_numeric($value) && (int) $value == $value;
 	}
 }

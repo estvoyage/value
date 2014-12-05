@@ -41,8 +41,8 @@ class unsigned extends units\test
 				$unsigned = new unsigned\testedClass($value)
 			)
 			->then
-				->integer($unsigned->asInteger)->isEqualTo($value)
-				->castToString($unsigned)->isEqualTo((string) $value)
+				->integer($unsigned->asInteger)->isEqualTo((int) $value)
+				->castToString($unsigned)->isEqualTo((string) (int) $value)
 		;
 	}
 
@@ -120,8 +120,15 @@ class unsigned extends units\test
 	protected function validValueProvider()
 	{
 		return [
-			'zero as integer' => 0,
-			'any integer between 1 and PHP_INT_MAX' => rand(1, PHP_INT_MAX)
+			'0 as integer' => 0,
+			'any integer between 1 and PHP_INT_MAX' => rand(1, PHP_INT_MAX),
+			'0 as string' => '0',
+			'any "string" between 1 and PHP_INT_MAX' => (string) rand(1, PHP_INT_MAX),
+			'0 as float' => 0.,
+			'any "float" between 1 and PHP_INT_MAX' => (float) rand(1, PHP_INT_MAX),
+			'binary number' => 0b11111111, // 255
+			'hexadecimal number' => 0x1A, // 26,
+			'octal number' => 0123 // 83
 		];
 	}
 
@@ -131,16 +138,13 @@ class unsigned extends units\test
 			'true' => true,
 			'false' => false,
 			'empty string' => '',
-			'any string' => uniqid(),
+			'any string' => 'a' . uniqid(),
 			'null' => null,
 			'array' => [ [] ],
 			'object' => new \stdclass,
-			'any integer casted to string' => (string) rand(- PHP_INT_MAX, PHP_INT_MAX),
-			'0 casted to string' => (string) 0,
-			'integer greater than 0 casted to string' => (string) rand(1, PHP_INT_MAX),
-			'any float casted to string' => (string) (float) rand(- PHP_INT_MAX, PHP_INT_MAX),
-			'0. casted to string' => (string) 0.,
-			'any float greater than 0 casted to string' => (string) (float) rand(1, PHP_INT_MAX)
+			'any negative integer' => - rand(1, PHP_INT_MAX),
+			'any negative "string"' => (string) - rand(1, PHP_INT_MAX),
+			'any negative "float"' => (float) - rand(1, PHP_INT_MAX)
 		];
 	}
 }

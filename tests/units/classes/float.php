@@ -119,30 +119,35 @@ class float extends units\test
 	protected function validValueDataProvider()
 	{
 		return [
-			rand(- PHP_INT_MAX, 1),
-			0,
-			rand(1, PHP_INT_MAX),
-			(float) rand(- PHP_INT_MAX, 1),
-			0.,
-			M_PI,
-			(float) rand(1, PHP_INT_MAX)
+			'any integer less than 0' => rand(- PHP_INT_MAX, 1),
+			'zero as integer' => 0,
+			'any integer greater than 0' => rand(1, PHP_INT_MAX),
+			'any float less than 0' => (float) - rand(1, PHP_INT_MAX),
+			'- pi' => - M_PI,
+			'0 as float' => 0.,
+			'pi' => M_PI,
+			'any float greater than 0' => (float) rand(1, PHP_INT_MAX),
+			'any "string" less than 0' => (string) rand(1, PHP_INT_MAX),
+			'- pi as string' => (string) - M_PI,
+			'0 as string' => (string) 0.,
+			'pi as string' => (string) M_PI,
+			'any "string" greater than 0' => (string) (float) rand(1, PHP_INT_MAX),
+			'binary number' => 0b11111111, // 255
+			'hexadecimal number' => 0x1A, // 26,
+			'octal number' => 0123 // 83
 		];
 	}
 
 	protected function invalidValueDataProvider()
 	{
 		return [
-			true,
-			false,
-			'',
-			uniqid(),
-			null,
-			[ [] ],
-			new \stdclass,
-			(string) (float) rand(- PHP_INT_MAX, 1),
-			(string) 0.,
-			(string) M_PI,
-			(string) (float) rand(1, PHP_INT_MAX)
+			'true '=> true,
+			'false' => false,
+			'empty string' => '',
+			'any string' => 'x' . uniqid(),
+			'null' => null,
+			'array' => [ [] ],
+			'object' => new \stdclass,
 		];
 	}
 }

@@ -21,6 +21,6 @@ abstract class float extends generic
 
 	static function validate($value)
 	{
-		return is_float($value) || is_int($value);
+		return is_numeric($value);
 	}
 }
