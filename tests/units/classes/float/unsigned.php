@@ -14,8 +14,6 @@ class unsigned extends units\test
 	{
 		$this->testedClass
 			->isAbstract
-			->extends('estvoyage\value\generic')
-			->extends('estvoyage\value\float')
 		;
 	}
 

@@ -14,7 +14,6 @@ class float extends units\test
 	{
 		$this->testedClass
 			->isAbstract
-			->extends('estvoyage\value\generic')
 		;
 	}
 
