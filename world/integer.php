@@ -4,7 +4,7 @@ namespace estvoyage\value\world;
 
 trait integer
 {
-	use generic;
+	use immutable;
 
 	function __construct($value = 0)
 	{

@@ -4,7 +4,7 @@ namespace estvoyage\value\world;
 
 trait string
 {
-	use generic;
+	use immutable;
 
 	function __construct($value = '')
 	{

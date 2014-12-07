@@ -37,4 +37,9 @@ trait immutable
 		*/
 		return isset($this->values[$property]) || array_key_exists($property, $this->values);
 	}
+
+	private function init(array $values)
+	{
+		$this->values = $values;
+	}
 }
