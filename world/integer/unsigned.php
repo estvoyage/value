@@ -19,7 +19,7 @@ trait unsigned
 			throw new \domainException('Value should be an integer greater than or equal to 0');
 		}
 
-		self::initAsInteger($value);
+		$this->initAsInteger($value);
 	}
 
 	static function validate($value)

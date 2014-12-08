@@ -19,7 +19,7 @@ trait unsigned
 			throw new \domainException('Value should be a float greater than or equal to 0.');
 		}
 
-		self::initAsFloat($value);
+		$this->initAsFloat($value);
 	}
 
 	static function validate($value)

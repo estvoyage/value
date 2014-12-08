@@ -13,7 +13,7 @@ trait string
 			throw new \domainException('Value should be a string');
 		}
 
-		self::initAsString($value);
+		$this->initAsString($value);
 	}
 
 	function __toString()
@@ -28,6 +28,6 @@ trait string
 
 	private function initAsString($value)
 	{
-		self::init([ 'asString' => $value ]);
+		$this->init([ 'asString' => $value ]);
 	}
 }

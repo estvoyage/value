@@ -13,7 +13,7 @@ trait integer
 			throw new \domainException('Value should be an integer');
 		}
 
-		self::init([ 'asInteger' => (int) $value ]);
+		$this->initAsInteger($value);
 	}
 
 	function __toString()
@@ -30,6 +30,6 @@ trait integer
 
 	private function initAsInteger($value)
 	{
-		self::init([ 'asInteger' => (int) $value ]);
+		$this->init([ 'asInteger' => (int) $value ]);
 	}
 }

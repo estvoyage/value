@@ -13,7 +13,7 @@ trait float
 			throw new \domainException('Value should be numeric');
 		}
 
-		self::initAsFloat($value);
+		$this->initAsFloat($value);
 	}
 
 	function __toString()
@@ -28,6 +28,6 @@ trait float
 
 	private function initAsFloat($value)
 	{
-		self::init([ 'asFloat' => (float) $value ]);
+		$this->init([ 'asFloat' => (float) $value ]);
 	}
 }
