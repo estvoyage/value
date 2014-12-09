@@ -17,7 +17,7 @@ class float extends units\test
 		;
 	}
 
-	function testBuildWithNoArgument()
+	function testConstructorWithNoArgument()
 	{
 		$this->float((new float\testedClass)->asFloat)->isZero;
 	}
@@ -25,15 +25,22 @@ class float extends units\test
 	/**
 	 * @dataProvider validValueDataProvider
 	 */
-	function testBuildWithValidValue($value)
+	function testConstructorWithValidValue($value)
 	{
-		$this->float((new float\testedClass($value))->asFloat)->isEqualTo((float) $value);
+		$this
+			->if(
+				$float = new float\testedClass($value)
+			)
+			->then
+				->float($float->asFloat)->isEqualTo((float) $value)
+				->castToString($float)->isEqualTo((string) (float) $value)
+		;
 	}
 
 	/**
 	 * @dataProvider invalidValueDataProvider
 	 */
-	function testBuildWithInvalidValue($value)
+	function testConstructorWithInvalidValue($value)
 	{
 		$this
 			->exception(function() use ($value) { new float\testedClass($value); })
