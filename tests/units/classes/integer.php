@@ -10,6 +10,11 @@ use
 
 class integer extends units\test
 {
+	function beforeTestMethod($method)
+	{
+		ini_set('precision', 14); // default value in the php.ini
+	}
+
 	function testClass()
 	{
 		$this->testedClass
@@ -125,25 +130,26 @@ class integer extends units\test
 	{
 		$this
 			->boolean(new integer\testedClass($value) == new integer\testedClass($value))->isTrue
-			->boolean(new integer\testedClass($value) == new integer\testedClass(rand(- PHP_INT_MAX, PHP_INT_MAX)))->isFalse
+			->boolean(new integer\testedClass($value) == new integer\testedClass(PHP_INT_MAX))->isFalse
 		;
 	}
 
 	protected function validValueProvider()
 	{
 		return [
-			'any integer less than zero' => - rand(1, PHP_INT_MAX),
+			'any integer less than zero' => - rand(1, PHP_INT_MAX - 1),
 			'0 as integer' => 0,
-			'any integer greater than zero' => rand(1, PHP_INT_MAX),
-			'any "string" less than zero' => (string) - rand(1, PHP_INT_MAX),
+			'any integer greater than zero' => rand(1, PHP_INT_MAX - 1),
+			'any "string" less than zero' => (string) - rand(1, PHP_INT_MAX - 1),
 			'0 as string' => '0',
-			'any "string" greater than zero' => (string) rand(1, PHP_INT_MAX),
-			'any "float" less than zero' => (float) - rand(1, PHP_INT_MAX),
+			'any "string" greater than zero' => (string) rand(1, PHP_INT_MAX - 1),
+			'any "float" less than zero' => (float) - rand(1, PHP_INT_MAX - 1),
 			'0 as float' => 0.,
-			'any "float" greater than zero' => (float) rand(1, PHP_INT_MAX),
+			'any "float" greater than zero' => (float) rand(1, PHP_INT_MAX - 1),
 			'binary number' => 0b11111111, // 255
 			'hexadecimal number' => 0x1A, // 26,
-			'octal number' => 0123 // 83
+			'octal number' => 0123, // 83
+			'float which is an integer regarding to precision' => 1.00000000000000001
 		];
 	}
 
@@ -158,7 +164,8 @@ class integer extends units\test
 			'array' => [ [] ],
 			'object' => new \stdclass,
 			'pi' => M_PI,
-			'- pi' => - M_PI
+			'- pi' => - M_PI,
+			'float with less than precision digits after comma' => 1.000000000000001
 		];
 	}
 }
