@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9ed50179c570024c0dd386de3a5a22b5",
+    "hash": "d4c84b4a3e2b6357429cb33c2bd183e9",
     "packages": [],
     "packages-dev": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba"
+                "reference": "f70d90155768a2d8552f3d0b473f6731652edfde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba",
-                "reference": "9b87d03f0a8dbb7ee6bd434c06e3b9d8971ad1ba",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/f70d90155768a2d8552f3d0b473f6731652edfde",
+                "reference": "f70d90155768a2d8552f3d0b473f6731652edfde",
                 "shasum": ""
             },
             "require": {
@@ -39,6 +39,11 @@
                 "bin/atoum"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "classes/"
@@ -79,7 +84,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2014-11-21 14:50:10"
+            "time": "2014-12-10 09:22:13"
         }
     ],
     "aliases": [],
@@ -89,7 +94,7 @@
     },
     "prefer-stable": false,
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=5.4.0"
     },
     "platform-dev": []
 }
