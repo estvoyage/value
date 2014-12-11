@@ -41,5 +41,7 @@ trait immutable
 	private function init(array $values)
 	{
 		$this->values = $values;
+
+		return $this;
 	}
 }
