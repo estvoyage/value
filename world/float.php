@@ -8,7 +8,7 @@ trait float
 
 	function __construct($value = 0.)
 	{
-		if (! static::validate($value))
+		if (! self::validate($value))
 		{
 			throw new \domainException('Value should be numeric');
 		}

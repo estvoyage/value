@@ -8,7 +8,7 @@ trait string
 
 	function __construct($value = '')
 	{
-		if (! static::validate($value))
+		if (! self::validate($value))
 		{
 			throw new \domainException('Value should be a string');
 		}
