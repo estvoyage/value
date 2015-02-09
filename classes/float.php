@@ -2,11 +2,27 @@
 
 namespace estvoyage\value;
 
-use
-	estvoyage\value\world as value;
-;
-
 abstract class float
 {
-	use value\float;
+	use immutable;
+
+	function __construct($value = 0.)
+	{
+		if (! self::validate($value))
+		{
+			throw new \domainException('Value should be numeric');
+		}
+
+		$this->init([ 'asFloat' => (float) $value ]);
+	}
+
+	function __toString()
+	{
+		return (string) $this->asFloat;
+	}
+
+	static function validate($value)
+	{
+		return is_numeric($value);
+	}
 }

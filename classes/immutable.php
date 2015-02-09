@@ -1,6 +1,6 @@
 <?php
 
-namespace estvoyage\value\world;
+namespace estvoyage\value;
 
 trait immutable
 {
