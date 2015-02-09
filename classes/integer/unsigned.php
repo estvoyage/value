@@ -8,6 +8,8 @@ use
 
 abstract class unsigned extends value\integer
 {
+	use value\unsigned;
+
 	function __construct($value = 0)
 	{
 		$domainException = null;
@@ -27,10 +29,5 @@ abstract class unsigned extends value\integer
 	static function validate($value)
 	{
 		return parent::validate($value) && self::isUnsigned($value);
-	}
-
-	private static function isUnsigned($value)
-	{
-		return $value >= 0;
 	}
 }
