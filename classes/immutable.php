@@ -35,7 +35,7 @@ trait immutable
 		so using array_key_exists as fallback to be sure that the key does not exist
 		is a good trade-off between reliability and performance
 		*/
-		return isset($this->values[$property]) || array_key_exists($property, $this->values);
+		return $this->values && isset($this->values[$property]) || array_key_exists($property, $this->values);
 	}
 
 	private function init(array $values)
