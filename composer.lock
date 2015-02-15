@@ -4,22 +4,16 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4c84b4a3e2b6357429cb33c2bd183e9",
+    "hash": "621350f4e9f3ff45110f678c5397cb08",
     "packages": [],
     "packages-dev": [
         {
-            "name": "atoum/atoum",
+            "name": "mageekguy/atoum",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/atoum/atoum.git",
-                "reference": "d59bdaadcd986cd64c20999d79c0ee67d2ef8517"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/d59bdaadcd986cd64c20999d79c0ee67d2ef8517",
-                "reference": "d59bdaadcd986cd64c20999d79c0ee67d2ef8517",
-                "shasum": ""
+                "url": "https://github.com/mageekguy/atoum.git",
+                "reference": "6b77fa6a24fa2e29cbb3db6f785023ef3b3c696a"
             },
             "require": {
                 "ext-hash": "*",
@@ -28,9 +22,6 @@
                 "ext-tokenizer": "*",
                 "ext-xml": "*",
                 "php": ">=5.3.3"
-            },
-            "replace": {
-                "mageekguy/atoum": "*"
             },
             "suggest": {
                 "ext-mbstring": "Provides support for UTF-8 strings"
@@ -49,7 +40,6 @@
                     "classes/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD"
             ],
@@ -76,7 +66,7 @@
                     "email": "ludovic.fleury@atoum.org"
                 }
             ],
-            "description": "Simple modern and intuitive unit testing framework for PHP 5.3+",
+            "description": "The root and a fork of the simple modern and intuitive unit testing framework for PHP 5.3+",
             "homepage": "http://www.atoum.org",
             "keywords": [
                 "TDD",
@@ -84,15 +74,16 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-02-11 13:37:55"
+            "time": "2015-02-15 19:31:34"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "atoum/atoum": 20
+        "mageekguy/atoum": 20
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.0"
     },

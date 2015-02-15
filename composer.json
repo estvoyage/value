@@ -15,8 +15,14 @@
 	"require": {
 		"php": ">=5.4.0"
 	},
+	"repositories": [
+		{
+			"url": "https://github.com/mageekguy/atoum.git",
+			"type": "git"
+		}
+	],
 	"require-dev": {
-		"atoum/atoum": "dev-master"
+		"mageekguy/atoum": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {

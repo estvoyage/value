@@ -8,4 +8,4 @@ if (defined('atoum\scripts\runner') === false)
 }
 
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../vendor/atoum/atoum/scripts/runner.php';
+require_once __DIR__ . '/../../vendor/mageekguy/atoum/scripts/runner.php';
