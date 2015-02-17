@@ -8,4 +8,4 @@ before_script:
 notifications:
   irc: "irc.freenode.org##east"
 script:
-  - php tests/units/runner.php
+  - vendor/bin/atoum
