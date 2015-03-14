@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "621350f4e9f3ff45110f678c5397cb08",
+    "hash": "aeb0325115e801c4019456caec7f0040",
     "packages": [],
     "packages-dev": [
         {
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mageekguy/atoum.git",
-                "reference": "6b77fa6a24fa2e29cbb3db6f785023ef3b3c696a"
+                "reference": "da4a6926c7e721834bea45e6be081bbe4b9c8d76"
             },
             "require": {
                 "ext-hash": "*",
@@ -41,7 +41,7 @@
                 ]
             },
             "license": [
-                "BSD"
+                "BSD-2-Clause"
             ],
             "authors": [
                 {
@@ -74,7 +74,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-02-15 19:31:34"
+            "time": "2015-02-26 12:08:02"
         }
     ],
     "aliases": [],
