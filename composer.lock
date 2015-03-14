@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mageekguy/atoum.git",
-                "reference": "da4a6926c7e721834bea45e6be081bbe4b9c8d76"
+                "reference": "41d2d36e19ce515a91a24ee7ad9350d1a8ebae7b"
             },
             "require": {
                 "ext-hash": "*",
@@ -74,7 +74,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-02-26 12:08:02"
+            "time": "2015-03-14 20:27:02"
         }
     ],
     "aliases": [],
