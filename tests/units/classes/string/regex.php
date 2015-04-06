@@ -13,7 +13,7 @@ class regex extends units\test
 	function testClass()
 	{
 		$this->testedClass
-			->isFinal
+			->isAbstract
 			->extends('estvoyage\value\string\notEmpty')
 		;
 	}

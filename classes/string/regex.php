@@ -6,7 +6,7 @@ use
 	estvoyage\value\string
 ;
 
-final class regex extends string\notEmpty
+abstract class regex extends string\notEmpty
 {
 	function __construct($value)
 	{
